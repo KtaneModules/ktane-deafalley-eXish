@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 615501dbe4f3fe94fbf4b564abb10237, type: 3}
+  m_Name: ModConfig
+  m_EditorClassIdentifier: 
+  id: deafAlleyModule
+  title: Deaf Alley
+  author: eXish, Blananas2
+  description: 'Listen for a shape and figure out which corners of the module to press
+    from the shape. Oh and don''t let that preview picture fool you, this is yet another
+    completely blank module!
+
+
+    HTML: https://ktane.timwi.de/HTML/Deaf%20Alley.html
+
+    PDF: https://ktane.timwi.de/PDF/Deaf%20Alley.pdf
+
+
+    Deaf Alley (deafAlleyModule) v1.0.0
+
+    Module Idea by Blananas2
+
+    Implemented by eXish
+
+    Twitch Plays not supported'
+  version: 1.0.0
+  outputFolder: build
+  previewImage: {fileID: 2800000, guid: dc52c2f4e8170fe43a228cf6c24dfe11, type: 3}
