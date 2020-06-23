@@ -55,7 +55,7 @@ public class DeafAlleyScript : MonoBehaviour {
         selectedShape = UnityEngine.Random.Range(0, shapes.Length);
         shapeObjs[selectedShape].SetActive(true);
         Debug.LogFormat("[Deaf Alley #{0}] The selected shape is {1}", moduleId, shapes[selectedShape]);
-        if (selectedShape == 93)
+        if (selectedShape == 92)
         {
             Debug.LogFormat("[Deaf Alley #{0}] There is no correct order to press the regions in, press any region to solve the module", moduleId);
         }
@@ -122,7 +122,7 @@ public class DeafAlleyScript : MonoBehaviour {
             {
                 input += "D";
             }
-            if (selectedShape == 93)
+            if (selectedShape == 92)
             {
                 Debug.LogFormat("[Deaf Alley #{0}] Pressed region {1}, Module Disarmed!", moduleId, input.Last());
                 shapeObjs[selectedShape].SetActive(false);
