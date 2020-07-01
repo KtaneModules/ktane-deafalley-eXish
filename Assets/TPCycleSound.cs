@@ -9,15 +9,12 @@ public class TPCycleSound : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("In");
-        Debug.Log(collision.collider.name);
         if (collision.collider.name != "Highlight")
             sound = Audio.PlaySoundAtTransformWithRef("tone", transform);
     }
 
     void OnCollisionExit(Collision collision)
     {
-        Debug.Log("Out");
         if (collision.collider.name != "Highlight")
             sound.StopSound();
     }

@@ -13,6 +13,7 @@ public class DeafAlleyScript : MonoBehaviour {
     public KMSelectable ModuleSelectable;
     public KMSelectable[] buttons;
     public GameObject[] shapeObjs;
+    public GameObject[] collObjs;
     public GameObject cycle;
     private KMAudio.KMAudioRef sound;
     private RaycastHit[] allHit;
@@ -34,13 +35,10 @@ public class DeafAlleyScript : MonoBehaviour {
     {
         moduleId = moduleIdCounter++;
         moduleSolved = false;
-        for (int i = 0; i < shapeObjs.Length; i++)
-        {
-            shapeObjs[i].name = shapeObjs[i].name + moduleId;
-        }
         for (int i = 0; i < objNames.Length; i++)
         {
             objNames[i] = objNames[i] + moduleId;
+            collObjs[i].name = objNames[i];
         }
         foreach (KMSelectable obj in buttons)
         {
@@ -67,8 +65,8 @@ public class DeafAlleyScript : MonoBehaviour {
 
     void Update()
     {
-        //if (tpcycle == null)
-        //{
+        if (tpcycle == null)
+        {
             if (focused)
             {
                 allHit = Physics.RaycastAll(Camera.main.ScreenPointToRay(Input.mousePosition));
@@ -98,7 +96,7 @@ public class DeafAlleyScript : MonoBehaviour {
                 if (sound != null)
                     sound.StopSound();
             }
-        //}
+        }
     }
 
     void PressButton(KMSelectable pressed)
@@ -155,7 +153,6 @@ public class DeafAlleyScript : MonoBehaviour {
         }
     }
 
-    /**
     //twitch plays
     private Coroutine tpcycle;
 
@@ -163,20 +160,71 @@ public class DeafAlleyScript : MonoBehaviour {
     {
         cycle.SetActive(true);
         float t = 0f;
-        while (t < 2f && !reachedEnd())
+        while (t < 2f && !reachedEnd(0))
         {
             cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.0138f, 0.07f), new Vector3(0.05f, 0.0138f, 0.07f), t);
-            t += Time.deltaTime * 0.5f;
+            t += Time.deltaTime * 0.3f;
             yield return null;
         }
         cycle.transform.localPosition = new Vector3(-0.07f, 0.0138f, 0.05f);
         t = 0f;
-        while (t < 2f && !reachedEnd())
+        while (t < 2f && !reachedEnd(0))
         {
             cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.0138f, 0.05f), new Vector3(0.07f, 0.0138f, 0.05f), t);
-            t += Time.deltaTime * 0.5f;
+            t += Time.deltaTime * 0.3f;
             yield return null;
         }
+        cycle.transform.localPosition = new Vector3(-0.07f, 0.0138f, 0.03f);
+        t = 0f;
+        while (t < 2f && !reachedEnd(0))
+        {
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.0138f, 0.03f), new Vector3(0.07f, 0.0138f, 0.03f), t);
+            t += Time.deltaTime * 0.3f;
+            yield return null;
+        }
+        cycle.transform.localPosition = new Vector3(-0.07f, 0.0138f, 0.01f);
+        t = 0f;
+        while (t < 2f && !reachedEnd(0))
+        {
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.0138f, 0.01f), new Vector3(0.07f, 0.0138f, 0.01f), t);
+            t += Time.deltaTime * 0.3f;
+            yield return null;
+        }
+        cycle.transform.localPosition = new Vector3(-0.07f, 0.0138f, -0.01f);
+        t = 0f;
+        while (t < 2f && !reachedEnd(0))
+        {
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.0138f, -0.01f), new Vector3(0.05f, 0.0138f, -0.01f), t);
+            t += Time.deltaTime * 0.3f;
+            yield return null;
+        }
+        cycle.transform.localPosition = new Vector3(-0.07f, 0.0138f, -0.03f);
+        t = 0f;
+        while (t < 2f && !reachedEnd(0))
+        {
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.0138f, -0.03f), new Vector3(0.07f, 0.0138f, -0.03f), t);
+            t += Time.deltaTime * 0.3f;
+            yield return null;
+        }
+        cycle.transform.localPosition = new Vector3(-0.07f, 0.0138f, -0.05f);
+        t = 0f;
+        while (t < 2f && !reachedEnd(0))
+        {
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.0138f, -0.05f), new Vector3(0.07f, 0.0138f, -0.05f), t);
+            t += Time.deltaTime * 0.3f;
+            yield return null;
+        }
+        cycle.transform.localPosition = new Vector3(-0.07f, 0.0138f, -0.07f);
+        t = 0f;
+        while (t < 2f && !reachedEnd(0))
+        {
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.0138f, -0.07f), new Vector3(0.07f, 0.0138f, -0.07f), t);
+            t += Time.deltaTime * 0.3f;
+            yield return null;
+        }
+        tpcycle = null;
+        if (sound != null)
+            sound.StopSound();
         cycle.SetActive(false);
     }
 
@@ -184,28 +232,145 @@ public class DeafAlleyScript : MonoBehaviour {
     {
         cycle.SetActive(true);
         float t = 0f;
-        while (t < 2f && !reachedEnd())
+        while (t < 2f && !reachedEnd(1))
         {
             cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.0138f, 0.07f), new Vector3(-0.07f, 0.0138f, -0.07f), t);
-            t += Time.deltaTime * 0.5f;
+            t += Time.deltaTime * 0.3f;
             yield return null;
         }
+        cycle.transform.localPosition = new Vector3(-0.05f, 0.0138f, 0.07f);
+        t = 0f;
+        while (t < 2f && !reachedEnd(1))
+        {
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.05f, 0.0138f, 0.07f), new Vector3(-0.05f, 0.0138f, -0.07f), t);
+            t += Time.deltaTime * 0.3f;
+            yield return null;
+        }
+        cycle.transform.localPosition = new Vector3(-0.03f, 0.0138f, 0.07f);
+        t = 0f;
+        while (t < 2f && !reachedEnd(1))
+        {
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.03f, 0.0138f, 0.07f), new Vector3(-0.03f, 0.0138f, -0.07f), t);
+            t += Time.deltaTime * 0.3f;
+            yield return null;
+        }
+        cycle.transform.localPosition = new Vector3(-0.01f, 0.0138f, 0.07f);
+        t = 0f;
+        while (t < 2f && !reachedEnd(1))
+        {
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.01f, 0.0138f, 0.07f), new Vector3(-0.01f, 0.0138f, -0.07f), t);
+            t += Time.deltaTime * 0.3f;
+            yield return null;
+        }
+        cycle.transform.localPosition = new Vector3(0.01f, 0.0138f, 0.07f);
+        t = 0f;
+        while (t < 2f && !reachedEnd(1))
+        {
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(0.01f, 0.0138f, 0.07f), new Vector3(0.01f, 0.0138f, -0.07f), t);
+            t += Time.deltaTime * 0.3f;
+            yield return null;
+        }
+        cycle.transform.localPosition = new Vector3(0.03f, 0.0138f, 0.07f);
+        t = 0f;
+        while (t < 2f && !reachedEnd(1))
+        {
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(0.03f, 0.0138f, 0.07f), new Vector3(0.03f, 0.0138f, -0.07f), t);
+            t += Time.deltaTime * 0.3f;
+            yield return null;
+        }
+        cycle.transform.localPosition = new Vector3(0.05f, 0.0138f, 0.07f);
+        t = 0f;
+        while (t < 2f && !reachedEnd(1))
+        {
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(0.05f, 0.0138f, 0.07f), new Vector3(0.05f, 0.0138f, -0.07f), t);
+            t += Time.deltaTime * 0.3f;
+            yield return null;
+        }
+        cycle.transform.localPosition = new Vector3(0.07f, 0.0138f, 0.05f);
+        t = 0f;
+        while (t < 2f && !reachedEnd(1))
+        {
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(0.07f, 0.0138f, 0.05f), new Vector3(0.07f, 0.0138f, -0.07f), t);
+            t += Time.deltaTime * 0.3f;
+            yield return null;
+        }
+        tpcycle = null;
+        if (sound != null)
+            sound.StopSound();
         cycle.SetActive(false);
     }
 
-    private bool reachedEnd()
+    private bool reachedEnd(int type)
     {
-        if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.05f, 0.0138f, 0.07f)) < 0.001f)
+        if (type == 0)
         {
-            return true;
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.05f, 0.0138f, 0.07f)) < 0.001f)
+            {
+                return true;
+            }
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.0138f, 0.05f)) < 0.001f)
+            {
+                return true;
+            }
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.0138f, 0.03f)) < 0.001f)
+            {
+                return true;
+            }
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.0138f, 0.01f)) < 0.001f)
+            {
+                return true;
+            }
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.05f, 0.0138f, -0.01f)) < 0.001f)
+            {
+                return true;
+            }
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.0138f, -0.03f)) < 0.001f)
+            {
+                return true;
+            }
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.0138f, -0.05f)) < 0.001f)
+            {
+                return true;
+            }
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.0138f, -0.07f)) < 0.001f)
+            {
+                return true;
+            }
         }
-        if (Vector3.Distance(cycle.transform.localPosition, new Vector3(-0.07f, 0.0138f, -0.07f)) < 0.001f)
+        else if (type == 1)
         {
-            return true;
-        }
-        if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.0138f, 0.05f)) < 0.001f)
-        {
-            return true;
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(-0.07f, 0.0138f, -0.07f)) < 0.001f)
+            {
+                return true;
+            }
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(-0.05f, 0.0138f, -0.07f)) < 0.001f)
+            {
+                return true;
+            }
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(-0.03f, 0.0138f, -0.07f)) < 0.001f)
+            {
+                return true;
+            }
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(-0.01f, 0.0138f, -0.07f)) < 0.001f)
+            {
+                return true;
+            }
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.01f, 0.0138f, -0.07f)) < 0.001f)
+            {
+                return true;
+            }
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.03f, 0.0138f, -0.07f)) < 0.001f)
+            {
+                return true;
+            }
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.05f, 0.0138f, -0.07f)) < 0.001f)
+            {
+                return true;
+            }
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.0138f, -0.07f)) < 0.001f)
+            {
+                return true;
+            }
         }
         return false;
     }
@@ -231,6 +396,8 @@ public class DeafAlleyScript : MonoBehaviour {
                     {
                         StopCoroutine(tpcycle);
                         tpcycle = null;
+                        if (sound != null)
+                            sound.StopSound();
                         cycle.transform.localPosition = new Vector3(-0.07f, 0.0138f, 0.07f);
                     }
                     tpcycle = StartCoroutine(cycleHoriz());
@@ -241,9 +408,15 @@ public class DeafAlleyScript : MonoBehaviour {
                     {
                         StopCoroutine(tpcycle);
                         tpcycle = null;
+                        if (sound != null)
+                            sound.StopSound();
                         cycle.transform.localPosition = new Vector3(-0.07f, 0.0138f, 0.07f);
                     }
                     tpcycle = StartCoroutine(cycleVert());
+                }
+                else
+                {
+                    yield return "sendtochaterror The specified way to feel the module '" + parameters[1] + "' is invalid!";
                 }
             }
             else if (parameters.Length == 1)
@@ -252,5 +425,45 @@ public class DeafAlleyScript : MonoBehaviour {
             }
             yield break;
         }
-    }*/
+        if (Regex.IsMatch(parameters[0], @"^\s*press\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
+        {
+            yield return null;
+            if (parameters.Length > 2)
+            {
+                yield return "sendtochaterror Too many parameters!";
+            }
+            else if (parameters.Length == 2)
+            {
+                string[] chars = new string[] { "A", "B", "C", "D" };
+                for (int i = 0; i < parameters[1].Length; i++)
+                {
+                    if (!chars.Contains(parameters[1].ToUpper()[i].ToString()))
+                    {
+                        yield return "sendtochaterror The region to press '" + parameters[1][i] + "' is invalid!";
+                        yield break;
+                    }
+                }
+                if (parameters[1].Length > 4)
+                {
+                    yield return "sendtochaterror No more than 4 regions can be pressed in one command!";
+                    yield break;
+                }
+                for (int i = 0; i < parameters[1].Length; i++)
+                {
+                    buttons[Array.IndexOf(chars, parameters[1].ToUpper()[i].ToString())].OnInteract();
+                    yield return new WaitForSeconds(0.1f);
+                }
+            }
+            else if (parameters.Length == 1)
+            {
+                yield return "sendtochaterror Please specify which region(s) to press!";
+            }
+            yield break;
+        }
+    }
+
+    IEnumerator TwitchHandleForcedSolve()
+    {
+        yield return ProcessTwitchCommand("press " + correctPresses[selectedShape].Substring(input.Length, 4-input.Length));
+    }
 }
