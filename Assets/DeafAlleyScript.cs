@@ -65,37 +65,37 @@ public class DeafAlleyScript : MonoBehaviour {
 
     void Update()
     {
-        if (tpcycle == null)
+        if (focused || tpcycle != null)
         {
-            if (focused)
-            {
+            if (tpcycle != null)
+                allHit = Physics.RaycastAll(new Ray(cycle.transform.position, Vector3.down));
+            else
                 allHit = Physics.RaycastAll(Camera.main.ScreenPointToRay(Input.mousePosition));
-                List<string> names = new List<string>();
-                foreach (RaycastHit hit in allHit)
+            List<string> names = new List<string>();
+            foreach (RaycastHit hit in allHit)
+            {
+                names.Add(hit.collider.name);
+                if (objNames.Contains(hit.collider.name) && !playing)
                 {
-                    names.Add(hit.collider.name);
-                    if (objNames.Contains(hit.collider.name) && !playing)
-                    {
-                        playing = true;
-                        lastHit = hit.collider.name;
-                        sound = Audio.PlaySoundAtTransformWithRef("tone", transform);
-                    }
-                }
-                if (!names.Contains(lastHit))
-                {
-                    playing = false;
-                    lastHit = "";
-                    if (sound != null)
-                        sound.StopSound();
+                    playing = true;
+                    lastHit = hit.collider.name;
+                    sound = Audio.PlaySoundAtTransformWithRef("tone", transform);
                 }
             }
-            else
+            if (!names.Contains(lastHit))
             {
                 playing = false;
                 lastHit = "";
                 if (sound != null)
                     sound.StopSound();
             }
+        }
+        else
+        {
+            playing = false;
+            lastHit = "";
+            if (sound != null)
+                sound.StopSound();
         }
     }
 
@@ -162,63 +162,63 @@ public class DeafAlleyScript : MonoBehaviour {
         float t = 0f;
         while (t < 2f && !reachedEnd(0))
         {
-            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.0138f, 0.07f), new Vector3(0.05f, 0.0138f, 0.07f), t);
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.02f, 0.07f), new Vector3(0.05f, 0.02f, 0.07f), t);
             t += Time.deltaTime * 0.3f;
             yield return null;
         }
-        cycle.transform.localPosition = new Vector3(-0.07f, 0.0138f, 0.05f);
+        cycle.transform.localPosition = new Vector3(-0.07f, 0.02f, 0.05f);
         t = 0f;
         while (t < 2f && !reachedEnd(0))
         {
-            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.0138f, 0.05f), new Vector3(0.07f, 0.0138f, 0.05f), t);
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.02f, 0.05f), new Vector3(0.07f, 0.02f, 0.05f), t);
             t += Time.deltaTime * 0.3f;
             yield return null;
         }
-        cycle.transform.localPosition = new Vector3(-0.07f, 0.0138f, 0.03f);
+        cycle.transform.localPosition = new Vector3(-0.07f, 0.02f, 0.03f);
         t = 0f;
         while (t < 2f && !reachedEnd(0))
         {
-            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.0138f, 0.03f), new Vector3(0.07f, 0.0138f, 0.03f), t);
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.02f, 0.03f), new Vector3(0.07f, 0.02f, 0.03f), t);
             t += Time.deltaTime * 0.3f;
             yield return null;
         }
-        cycle.transform.localPosition = new Vector3(-0.07f, 0.0138f, 0.01f);
+        cycle.transform.localPosition = new Vector3(-0.07f, 0.02f, 0.01f);
         t = 0f;
         while (t < 2f && !reachedEnd(0))
         {
-            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.0138f, 0.01f), new Vector3(0.07f, 0.0138f, 0.01f), t);
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.02f, 0.01f), new Vector3(0.07f, 0.02f, 0.01f), t);
             t += Time.deltaTime * 0.3f;
             yield return null;
         }
-        cycle.transform.localPosition = new Vector3(-0.07f, 0.0138f, -0.01f);
+        cycle.transform.localPosition = new Vector3(-0.07f, 0.02f, -0.01f);
         t = 0f;
         while (t < 2f && !reachedEnd(0))
         {
-            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.0138f, -0.01f), new Vector3(0.05f, 0.0138f, -0.01f), t);
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.02f, -0.01f), new Vector3(0.05f, 0.02f, -0.01f), t);
             t += Time.deltaTime * 0.3f;
             yield return null;
         }
-        cycle.transform.localPosition = new Vector3(-0.07f, 0.0138f, -0.03f);
+        cycle.transform.localPosition = new Vector3(-0.07f, 0.02f, -0.03f);
         t = 0f;
         while (t < 2f && !reachedEnd(0))
         {
-            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.0138f, -0.03f), new Vector3(0.07f, 0.0138f, -0.03f), t);
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.02f, -0.03f), new Vector3(0.07f, 0.02f, -0.03f), t);
             t += Time.deltaTime * 0.3f;
             yield return null;
         }
-        cycle.transform.localPosition = new Vector3(-0.07f, 0.0138f, -0.05f);
+        cycle.transform.localPosition = new Vector3(-0.07f, 0.02f, -0.05f);
         t = 0f;
         while (t < 2f && !reachedEnd(0))
         {
-            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.0138f, -0.05f), new Vector3(0.07f, 0.0138f, -0.05f), t);
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.02f, -0.05f), new Vector3(0.07f, 0.02f, -0.05f), t);
             t += Time.deltaTime * 0.3f;
             yield return null;
         }
-        cycle.transform.localPosition = new Vector3(-0.07f, 0.0138f, -0.07f);
+        cycle.transform.localPosition = new Vector3(-0.07f, 0.02f, -0.07f);
         t = 0f;
         while (t < 2f && !reachedEnd(0))
         {
-            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.0138f, -0.07f), new Vector3(0.07f, 0.0138f, -0.07f), t);
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.02f, -0.07f), new Vector3(0.07f, 0.02f, -0.07f), t);
             t += Time.deltaTime * 0.3f;
             yield return null;
         }
@@ -234,63 +234,63 @@ public class DeafAlleyScript : MonoBehaviour {
         float t = 0f;
         while (t < 2f && !reachedEnd(1))
         {
-            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.0138f, 0.07f), new Vector3(-0.07f, 0.0138f, -0.07f), t);
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.02f, 0.07f), new Vector3(-0.07f, 0.02f, -0.07f), t);
             t += Time.deltaTime * 0.3f;
             yield return null;
         }
-        cycle.transform.localPosition = new Vector3(-0.05f, 0.0138f, 0.07f);
+        cycle.transform.localPosition = new Vector3(-0.05f, 0.02f, 0.07f);
         t = 0f;
         while (t < 2f && !reachedEnd(1))
         {
-            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.05f, 0.0138f, 0.07f), new Vector3(-0.05f, 0.0138f, -0.07f), t);
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.05f, 0.02f, 0.07f), new Vector3(-0.05f, 0.02f, -0.07f), t);
             t += Time.deltaTime * 0.3f;
             yield return null;
         }
-        cycle.transform.localPosition = new Vector3(-0.03f, 0.0138f, 0.07f);
+        cycle.transform.localPosition = new Vector3(-0.03f, 0.02f, 0.07f);
         t = 0f;
         while (t < 2f && !reachedEnd(1))
         {
-            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.03f, 0.0138f, 0.07f), new Vector3(-0.03f, 0.0138f, -0.07f), t);
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.03f, 0.02f, 0.07f), new Vector3(-0.03f, 0.02f, -0.07f), t);
             t += Time.deltaTime * 0.3f;
             yield return null;
         }
-        cycle.transform.localPosition = new Vector3(-0.01f, 0.0138f, 0.07f);
+        cycle.transform.localPosition = new Vector3(-0.01f, 0.02f, 0.07f);
         t = 0f;
         while (t < 2f && !reachedEnd(1))
         {
-            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.01f, 0.0138f, 0.07f), new Vector3(-0.01f, 0.0138f, -0.07f), t);
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.01f, 0.02f, 0.07f), new Vector3(-0.01f, 0.02f, -0.07f), t);
             t += Time.deltaTime * 0.3f;
             yield return null;
         }
-        cycle.transform.localPosition = new Vector3(0.01f, 0.0138f, 0.07f);
+        cycle.transform.localPosition = new Vector3(0.01f, 0.02f, 0.07f);
         t = 0f;
         while (t < 2f && !reachedEnd(1))
         {
-            cycle.transform.localPosition = Vector3.Lerp(new Vector3(0.01f, 0.0138f, 0.07f), new Vector3(0.01f, 0.0138f, -0.07f), t);
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(0.01f, 0.02f, 0.07f), new Vector3(0.01f, 0.02f, -0.07f), t);
             t += Time.deltaTime * 0.3f;
             yield return null;
         }
-        cycle.transform.localPosition = new Vector3(0.03f, 0.0138f, 0.07f);
+        cycle.transform.localPosition = new Vector3(0.03f, 0.02f, 0.07f);
         t = 0f;
         while (t < 2f && !reachedEnd(1))
         {
-            cycle.transform.localPosition = Vector3.Lerp(new Vector3(0.03f, 0.0138f, 0.07f), new Vector3(0.03f, 0.0138f, -0.07f), t);
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(0.03f, 0.02f, 0.07f), new Vector3(0.03f, 0.02f, -0.07f), t);
             t += Time.deltaTime * 0.3f;
             yield return null;
         }
-        cycle.transform.localPosition = new Vector3(0.05f, 0.0138f, 0.07f);
+        cycle.transform.localPosition = new Vector3(0.05f, 0.02f, 0.07f);
         t = 0f;
         while (t < 2f && !reachedEnd(1))
         {
-            cycle.transform.localPosition = Vector3.Lerp(new Vector3(0.05f, 0.0138f, 0.07f), new Vector3(0.05f, 0.0138f, -0.07f), t);
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(0.05f, 0.02f, 0.07f), new Vector3(0.05f, 0.02f, -0.07f), t);
             t += Time.deltaTime * 0.3f;
             yield return null;
         }
-        cycle.transform.localPosition = new Vector3(0.07f, 0.0138f, 0.05f);
+        cycle.transform.localPosition = new Vector3(0.07f, 0.02f, 0.05f);
         t = 0f;
         while (t < 2f && !reachedEnd(1))
         {
-            cycle.transform.localPosition = Vector3.Lerp(new Vector3(0.07f, 0.0138f, 0.05f), new Vector3(0.07f, 0.0138f, -0.07f), t);
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(0.07f, 0.02f, 0.05f), new Vector3(0.07f, 0.02f, -0.07f), t);
             t += Time.deltaTime * 0.3f;
             yield return null;
         }
@@ -304,70 +304,70 @@ public class DeafAlleyScript : MonoBehaviour {
     {
         if (type == 0)
         {
-            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.05f, 0.0138f, 0.07f)) < 0.001f)
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.05f, 0.02f, 0.07f)) < 0.001f)
             {
                 return true;
             }
-            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.0138f, 0.05f)) < 0.001f)
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.02f, 0.05f)) < 0.001f)
             {
                 return true;
             }
-            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.0138f, 0.03f)) < 0.001f)
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.02f, 0.03f)) < 0.001f)
             {
                 return true;
             }
-            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.0138f, 0.01f)) < 0.001f)
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.02f, 0.01f)) < 0.001f)
             {
                 return true;
             }
-            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.05f, 0.0138f, -0.01f)) < 0.001f)
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.05f, 0.02f, -0.01f)) < 0.001f)
             {
                 return true;
             }
-            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.0138f, -0.03f)) < 0.001f)
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.02f, -0.03f)) < 0.001f)
             {
                 return true;
             }
-            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.0138f, -0.05f)) < 0.001f)
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.02f, -0.05f)) < 0.001f)
             {
                 return true;
             }
-            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.0138f, -0.07f)) < 0.001f)
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.02f, -0.07f)) < 0.001f)
             {
                 return true;
             }
         }
         else if (type == 1)
         {
-            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(-0.07f, 0.0138f, -0.07f)) < 0.001f)
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(-0.07f, 0.02f, -0.07f)) < 0.001f)
             {
                 return true;
             }
-            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(-0.05f, 0.0138f, -0.07f)) < 0.001f)
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(-0.05f, 0.02f, -0.07f)) < 0.001f)
             {
                 return true;
             }
-            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(-0.03f, 0.0138f, -0.07f)) < 0.001f)
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(-0.03f, 0.02f, -0.07f)) < 0.001f)
             {
                 return true;
             }
-            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(-0.01f, 0.0138f, -0.07f)) < 0.001f)
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(-0.01f, 0.02f, -0.07f)) < 0.001f)
             {
                 return true;
             }
-            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.01f, 0.0138f, -0.07f)) < 0.001f)
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.01f, 0.02f, -0.07f)) < 0.001f)
             {
                 return true;
             }
-            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.03f, 0.0138f, -0.07f)) < 0.001f)
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.03f, 0.02f, -0.07f)) < 0.001f)
             {
                 return true;
             }
-            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.05f, 0.0138f, -0.07f)) < 0.001f)
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.05f, 0.02f, -0.07f)) < 0.001f)
             {
                 return true;
             }
-            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.0138f, -0.07f)) < 0.001f)
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.02f, -0.07f)) < 0.001f)
             {
                 return true;
             }
@@ -398,7 +398,7 @@ public class DeafAlleyScript : MonoBehaviour {
                         tpcycle = null;
                         if (sound != null)
                             sound.StopSound();
-                        cycle.transform.localPosition = new Vector3(-0.07f, 0.0138f, 0.07f);
+                        cycle.transform.localPosition = new Vector3(-0.07f, 0.02f, 0.07f);
                     }
                     tpcycle = StartCoroutine(cycleHoriz());
                 }
@@ -410,7 +410,7 @@ public class DeafAlleyScript : MonoBehaviour {
                         tpcycle = null;
                         if (sound != null)
                             sound.StopSound();
-                        cycle.transform.localPosition = new Vector3(-0.07f, 0.0138f, 0.07f);
+                        cycle.transform.localPosition = new Vector3(-0.07f, 0.02f, 0.07f);
                     }
                     tpcycle = StartCoroutine(cycleVert());
                 }
