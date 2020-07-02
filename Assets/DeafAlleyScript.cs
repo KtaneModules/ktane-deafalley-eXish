@@ -65,7 +65,7 @@ public class DeafAlleyScript : MonoBehaviour {
 
     void Update()
     {
-        if (focused || tpcycle != null)
+        if (focused)
         {
             if (tpcycle != null)
                 allHit = Physics.RaycastAll(new Ray(cycle.transform.position, Vector3.down));
@@ -194,7 +194,7 @@ public class DeafAlleyScript : MonoBehaviour {
         t = 0f;
         while (t < 2f && !reachedEnd(0))
         {
-            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.02f, -0.01f), new Vector3(0.05f, 0.02f, -0.01f), t);
+            cycle.transform.localPosition = Vector3.Lerp(new Vector3(-0.07f, 0.02f, -0.01f), new Vector3(0.07f, 0.02f, -0.01f), t);
             t += Time.deltaTime * 0.3f;
             yield return null;
         }
@@ -320,7 +320,7 @@ public class DeafAlleyScript : MonoBehaviour {
             {
                 return true;
             }
-            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.05f, 0.02f, -0.01f)) < 0.001f)
+            if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.02f, -0.01f)) < 0.001f)
             {
                 return true;
             }
@@ -395,24 +395,20 @@ public class DeafAlleyScript : MonoBehaviour {
                     if (tpcycle != null)
                     {
                         StopCoroutine(tpcycle);
-                        tpcycle = null;
-                        if (sound != null)
-                            sound.StopSound();
-                        cycle.transform.localPosition = new Vector3(-0.07f, 0.02f, 0.07f);
                     }
+                    cycle.transform.localPosition = new Vector3(-0.07f, 0.02f, 0.07f);
                     tpcycle = StartCoroutine(cycleHoriz());
+                    while (tpcycle != null) { yield return "trycancel Stopped focusing on feeling due to a request to cancel!"; }
                 }
                 else if (Regex.IsMatch(parameters[1], @"^\s*vertical\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant) || Regex.IsMatch(parameters[1], @"^\s*vert\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant) || Regex.IsMatch(parameters[1], @"^\s*v\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
                 {
                     if (tpcycle != null)
                     {
                         StopCoroutine(tpcycle);
-                        tpcycle = null;
-                        if (sound != null)
-                            sound.StopSound();
-                        cycle.transform.localPosition = new Vector3(-0.07f, 0.02f, 0.07f);
                     }
+                    cycle.transform.localPosition = new Vector3(-0.07f, 0.02f, 0.07f);
                     tpcycle = StartCoroutine(cycleVert());
+                    while (tpcycle != null) { yield return "trycancel Stopped focusing on feeling due to a request to cancel!"; }
                 }
                 else
                 {
