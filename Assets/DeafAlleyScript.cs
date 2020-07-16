@@ -68,7 +68,7 @@ public class DeafAlleyScript : MonoBehaviour {
         if (focused)
         {
             if (tpcycle != null)
-                allHit = Physics.RaycastAll(new Ray(cycle.transform.position, Vector3.down));
+                allHit = Physics.RaycastAll(new Ray(cycle.transform.position, -cycle.transform.up));
             else
                 allHit = Physics.RaycastAll(Camera.main.ScreenPointToRay(Input.mousePosition));
             List<string> names = new List<string>();
