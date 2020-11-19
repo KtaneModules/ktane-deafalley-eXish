@@ -49,7 +49,7 @@ public class DeafAlleyScript : MonoBehaviour {
             focused = true;
         }
         ModuleSelectable.OnFocus += delegate () { focused = true; };
-        ModuleSelectable.OnDefocus += delegate () { focused = false; };
+        ModuleSelectable.OnDefocus += delegate () { if (tpcycle == null) focused = false; };
     }
 
     void Start () {
@@ -229,6 +229,7 @@ public class DeafAlleyScript : MonoBehaviour {
         if (sound != null)
             sound.StopSound();
         cycle.SetActive(false);
+        focused = false;
     }
 
     private IEnumerator cycleVert()
@@ -301,6 +302,7 @@ public class DeafAlleyScript : MonoBehaviour {
         if (sound != null)
             sound.StopSound();
         cycle.SetActive(false);
+        focused = false;
     }
 
     private bool reachedEnd(int type)

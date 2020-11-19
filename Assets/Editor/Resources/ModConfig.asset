@@ -24,13 +24,13 @@ MonoBehaviour:
     PDF: https://ktane.timwi.de/PDF/Deaf%20Alley.pdf
 
 
-    Deaf Alley (deafAlleyModule) v1.0.8
+    Deaf Alley (deafAlleyModule) v1.0.9
 
     Module Idea by Blananas2
 
     Implemented by eXish
 
     Twitch Plays supported'
-  version: 1.0.8
+  version: 1.0.9
   outputFolder: build
   previewImage: {fileID: 2800000, guid: dc52c2f4e8170fe43a228cf6c24dfe11, type: 3}
