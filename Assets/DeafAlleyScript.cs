@@ -54,6 +54,10 @@ public class DeafAlleyScript : MonoBehaviour {
 
     void Start () {
         selectedShape = UnityEngine.Random.Range(0, shapes.Length);
+        while (shapeBad())
+        {
+            selectedShape = UnityEngine.Random.Range(0, shapes.Length);
+        }
         shapeObjs[selectedShape].SetActive(true);
         Debug.LogFormat("[Deaf Alley #{0}] The selected shape is {1}", moduleId, shapes[selectedShape]);
         if (selectedShape == 92)
@@ -154,6 +158,15 @@ public class DeafAlleyScript : MonoBehaviour {
                 Start();
             }
         }
+    }
+
+    private bool shapeBad()
+    {
+        if (shapes[selectedShape] == "c" || shapes[selectedShape] == "o" || shapes[selectedShape] == "s" || shapes[selectedShape] == "v" || shapes[selectedShape] == "w" || shapes[selectedShape] == "x" || shapes[selectedShape] == "z" || shapes[selectedShape] == "0" || shapes[selectedShape] == "5" || shapes[selectedShape] == "|")
+        {
+            return true;
+        }
+        return false;
     }
 
     //twitch plays
