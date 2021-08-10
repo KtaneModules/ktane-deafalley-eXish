@@ -17,9 +17,9 @@ public class DeafAlleyScript : MonoBehaviour {
     private KMAudio.KMAudioRef sound;
     private RaycastHit[] allHit;
 
-    private string[] objNames = new string[] { "deafShapeA", "deafShapeB", "deafShapeC", "deafShapeD", "deafShapeE", "deafShapeF", "deafShapeG", "deafShapeH", "deafShapeI", "deafShapeJ", "deafShapeK", "deafShapeL", "deafShapeM", "deafShapeN", "deafShapeO", "deafShapeP", "deafShapeQ", "deafShapeR", "deafShapeS", "deafShapeT", "deafShapeU", "deafShapeV", "deafShapeW", "deafShapeX", "deafShapeY", "deafShapeZ", "deafShapeAl", "deafShapeBl", "deafShapeCl", "deafShapeDl", "deafShapeEl", "deafShapeFl", "deafShapeGl", "deafShapeHl", "deafShapeIl", "deafShapeJl", "deafShapeKl", "deafShapeMl", "deafShapeNl", "deafShapeOl", "deafShapePl", "deafShapeQl", "deafShapeRl", "deafShapeSl", "deafShapeTl", "deafShapeUl", "deafShapeVl", "deafShapeWl", "deafShapeXl", "deafShapeYl", "deafShapeZl", "deafShape0", "deafShape1", "deafShape2", "deafShape3", "deafShape4", "deafShape5", "deafShape6", "deafShape7", "deafShape8", "deafShape9", "deafShape~", "deafShape`", "deafShape!", "deafShape@", "deafShape#", "deafShape$", "deafShape%", "deafShape^", "deafShape&", "deafShapeAst", "deafShape(", "deafShape)", "deafShape-", "deafShape_", "deafShape+", "deafShape=", "deafShape[", "deafShape]", "deafShape{", "deafShape}", "deafShapeCol", "deafShape;", "deafShape?", "deafShape?", "deafShapeLes", "deafShape,", "deafShapeGre", "deafShape.", "deafShapeQMa", "deafShapeFSl", "deafShapeVer", "deafShapeBSl" };
-    private string[] correctPresses = new string[] { "ABCD", "ABDC", "ACBD", "ACDB", "ADBC", "ADCB", "BACD", "BADC", "BCAD", "BCDA", "BDAC", "BDCA", "CABD", "CADB", "CBAD", "CBDA", "CDAB", "CDBA", "DABC", "DACB", "DBAC", "DBCA", "DCAB", "DCBA", "AAAA", "BBBB", "CCCC", "DDDD", "ABAB", "ACAC", "ADAD", "BABA", "BCBC", "BDBD", "CACA", "CBCB", "CDCD", "DADA", "DBDB", "DCDC", "ABBB", "BABB", "BBAB", "BBBA", "ACCC", "CACC", "CCAC", "CCCA", "ADDD", "DADD", "DDAD", "DDDA", "BAAA", "ABAA", "AABA", "AAAB", "BCCC", "CBCC", "CCBC", "CCCB", "BDDD", "DBDD", "DDBD", "DDDB", "CAAA", "ACAA", "AACA", "AAAC", "CBBB", "BCBB", "BBCB", "BBBC", "CDDD", "DCDD", "DDCD", "DDDC", "DAAA", "ADAA", "AADA", "AAAD", "DBBB", "BDBB", "BBDB", "BBBD", "DCCC", "CDCC", "CCDC", "CCCD", "AABB", "BBCC", "CCDD", "DDAA" };
-    private string[] shapes = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "~", "`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "+", "=", "[", "]", "{", "}", ":", ";", "“", "‘", "<", ",", ">", ".", "?", "/", "|", "\\" };
+    private string[] objNames = new string[] { "deafShapeA", "deafShapeB", "deafShapeC", "deafShapeD", "deafShapeE", "deafShapeF", "deafShapeG", "deafShapeH", "deafShapeI", "deafShapeJ", "deafShapeK", "deafShapeL", "deafShapeM", "deafShapeN", "deafShapeO", "deafShapeP", "deafShapeQ", "deafShapeR", "deafShapeS", "deafShapeT", "deafShapeU", "deafShapeV", "deafShapeW", "deafShapeX", "deafShapeY", "deafShapeZ", "deafShapeAl", "deafShapeBl", "deafShapeDl", "deafShapeEl", "deafShapeFl", "deafShapeGl", "deafShapeHl", "deafShapeIl", "deafShapeJl", "deafShapeKl", "deafShapeMl", "deafShapeNl", "deafShapePl", "deafShapeQl", "deafShapeRl", "deafShapeTl", "deafShapeUl", "deafShapeYl", "deafShape1", "deafShape2", "deafShape3", "deafShape4", "deafShape6", "deafShape7", "deafShape8", "deafShape9", "deafShape~", "deafShape`", "deafShape!", "deafShape@", "deafShape#", "deafShape$", "deafShape%", "deafShape^", "deafShape&", "deafShapeAst", "deafShape(", "deafShape)", "deafShape-", "deafShape_", "deafShape+", "deafShape=", "deafShape[", "deafShape]", "deafShape{", "deafShape}", "deafShapeCol", "deafShape;", "deafShape?", "deafShape?", "deafShapeLes", "deafShape,", "deafShapeGre", "deafShape.", "deafShapeQMa", "deafShapeFSl", "deafShapeBSl" };
+    private string[] correctPresses = new string[] { "ABCD", "ABDC", "ACBD", "ACDB", "ADBC", "ADCB", "BACD", "BADC", "BCAD", "BCDA", "BDAC", "BDCA", "CABD", "CADB", "CBAD", "CBDA", "CDAB", "CDBA", "DABC", "DACB", "DBAC", "DBCA", "DCAB", "DCBA", "AAAA", "BBBB", "CCCC", "DDDD", "ACAC", "ADAD", "BABA", "BCBC", "BDBD", "CACA", "CBCB", "CDCD", "DADA", "DBDB", "ABBB", "BABB", "BBAB", "ACCC", "CACC", "DADD", "BAAA", "ABAA", "AABA", "AAAB", "CBCC", "CCBC", "CCCB", "BDDD", "DBDD", "DDBD", "DDDB", "CAAA", "ACAA", "AACA", "AAAC", "CBBB", "BCBB", "BBCB", "BBBC", "CDDD", "DCDD", "DDCD", "DDDC", "DAAA", "ADAA", "AADA", "AAAD", "DBBB", "BDBB", "BBDB", "BBBD", "DCCC", "CDCC", "CCDC", "CCCD", "AABB", "BBCC", "CCDD" };
+    private string[] shapes = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "d", "e", "f", "g", "h", "i", "j", "k", "m", "n", "p", "q", "r", "t", "u", "y", "1", "2", "3", "4", "6", "7", "8", "9", "~", "`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "+", "=", "[", "]", "{", "}", ":", ";", "“", "‘", "<", ",", ">", ".", "?", "/", "\\" };
     private int selectedShape = -1;
     private string input = "";
     private string lastHit = "";
@@ -54,13 +54,9 @@ public class DeafAlleyScript : MonoBehaviour {
 
     void Start () {
         selectedShape = UnityEngine.Random.Range(0, shapes.Length);
-        while (shapeBad())
-        {
-            selectedShape = UnityEngine.Random.Range(0, shapes.Length);
-        }
         shapeObjs[selectedShape].SetActive(true);
         Debug.LogFormat("[Deaf Alley #{0}] The selected shape is {1}", moduleId, shapes[selectedShape]);
-        if (selectedShape == 92)
+        if (selectedShape == 82)
         {
             Debug.LogFormat("[Deaf Alley #{0}] There is no correct order to press the regions in, press any region to solve the module", moduleId);
         }
@@ -158,15 +154,6 @@ public class DeafAlleyScript : MonoBehaviour {
                 Start();
             }
         }
-    }
-
-    private bool shapeBad()
-    {
-        if (shapes[selectedShape] == "c" || shapes[selectedShape] == "o" || shapes[selectedShape] == "s" || shapes[selectedShape] == "v" || shapes[selectedShape] == "w" || shapes[selectedShape] == "x" || shapes[selectedShape] == "z" || shapes[selectedShape] == "0" || shapes[selectedShape] == "5" || shapes[selectedShape] == "|")
-        {
-            return true;
-        }
-        return false;
     }
 
     //twitch plays
