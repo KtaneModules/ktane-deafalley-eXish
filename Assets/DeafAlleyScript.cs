@@ -123,7 +123,7 @@ public class DeafAlleyScript : MonoBehaviour {
             {
                 input += "D";
             }
-            if (selectedShape == 92)
+            if (selectedShape == 82)
             {
                 Debug.LogFormat("[Deaf Alley #{0}] Pressed region {1}, Module Disarmed!", moduleId, input.Last());
                 shapeObjs[selectedShape].SetActive(false);
