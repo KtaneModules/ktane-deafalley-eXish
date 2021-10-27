@@ -137,7 +137,7 @@ public class DeafAlleyScript : MonoBehaviour {
                 Debug.LogFormat("[Deaf Alley #{0}] Pressed region {1}, which is correct", moduleId, input.Last());
                 if (input.Length == 4)
                 {
-                    Debug.LogFormat("[Deaf Alley #{0}] All regions have been pressed in the correct order, Module Disarmed!", moduleId);
+                    Debug.LogFormat("[Deaf Alley #{0}] All regions have been pressed in the correct order, module disarmed!", moduleId);
                     shapeObjs[selectedShape].SetActive(false);
                     if (sound != null)
                         sound.StopSound();
@@ -147,11 +147,9 @@ public class DeafAlleyScript : MonoBehaviour {
             }
             else
             {
-                Debug.LogFormat("[Deaf Alley #{0}] Pressed region {1}, which is incorrect. Strike! Module Resetting...", moduleId, input.Last());
+                Debug.LogFormat("[Deaf Alley #{0}] Pressed region {1}, which is incorrect. Strike! Presses reset...", moduleId, input.Last());
                 GetComponent<KMBombModule>().HandleStrike();
                 input = "";
-                shapeObjs[selectedShape].SetActive(false);
-                Start();
             }
         }
     }
