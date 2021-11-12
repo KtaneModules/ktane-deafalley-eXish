@@ -50,6 +50,7 @@ public class DeafAlleyScript : MonoBehaviour {
         }
         ModuleSelectable.OnFocus += delegate () { focused = true; };
         ModuleSelectable.OnDefocus += delegate () { if (tpcycle == null) focused = false; };
+        bomb.OnBombExploded += delegate () { if (sound != null) sound.StopSound(); };
     }
 
     void Start () {
