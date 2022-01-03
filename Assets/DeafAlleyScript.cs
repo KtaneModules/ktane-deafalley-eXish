@@ -309,72 +309,40 @@ public class DeafAlleyScript : MonoBehaviour {
         if (type == 0)
         {
             if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.05f, 0.02f, 0.07f)) < 0.001f)
-            {
                 return true;
-            }
             if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.02f, 0.05f)) < 0.001f)
-            {
                 return true;
-            }
             if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.02f, 0.03f)) < 0.001f)
-            {
                 return true;
-            }
             if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.02f, 0.01f)) < 0.001f)
-            {
                 return true;
-            }
             if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.02f, -0.01f)) < 0.001f)
-            {
                 return true;
-            }
             if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.02f, -0.03f)) < 0.001f)
-            {
                 return true;
-            }
             if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.02f, -0.05f)) < 0.001f)
-            {
                 return true;
-            }
             if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.02f, -0.07f)) < 0.001f)
-            {
                 return true;
-            }
         }
         else if (type == 1)
         {
             if (Vector3.Distance(cycle.transform.localPosition, new Vector3(-0.07f, 0.02f, -0.07f)) < 0.001f)
-            {
                 return true;
-            }
             if (Vector3.Distance(cycle.transform.localPosition, new Vector3(-0.05f, 0.02f, -0.07f)) < 0.001f)
-            {
                 return true;
-            }
             if (Vector3.Distance(cycle.transform.localPosition, new Vector3(-0.03f, 0.02f, -0.07f)) < 0.001f)
-            {
                 return true;
-            }
             if (Vector3.Distance(cycle.transform.localPosition, new Vector3(-0.01f, 0.02f, -0.07f)) < 0.001f)
-            {
                 return true;
-            }
             if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.01f, 0.02f, -0.07f)) < 0.001f)
-            {
                 return true;
-            }
             if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.03f, 0.02f, -0.07f)) < 0.001f)
-            {
                 return true;
-            }
             if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.05f, 0.02f, -0.07f)) < 0.001f)
-            {
                 return true;
-            }
             if (Vector3.Distance(cycle.transform.localPosition, new Vector3(0.07f, 0.02f, -0.07f)) < 0.001f)
-            {
                 return true;
-            }
         }
         return false;
     }
@@ -389,51 +357,40 @@ public class DeafAlleyScript : MonoBehaviour {
         {
             yield return null;
             if (parameters.Length > 2)
-            {
                 yield return "sendtochaterror Too many parameters!";
-            }
             else if (parameters.Length == 2)
             {
                 if (Regex.IsMatch(parameters[1], @"^\s*horizontal\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant) || Regex.IsMatch(parameters[1], @"^\s*horiz\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant) || Regex.IsMatch(parameters[1], @"^\s*h\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
                 {
                     if (tpcycle != null)
-                    {
                         StopCoroutine(tpcycle);
-                    }
                     cycle.transform.localPosition = new Vector3(-0.07f, 0.02f, 0.07f);
                     tpcycle = StartCoroutine(cycleHoriz());
-                    while (tpcycle != null) { yield return "trycancel Stopped focusing on feeling due to a request to cancel!"; }
                 }
                 else if (Regex.IsMatch(parameters[1], @"^\s*vertical\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant) || Regex.IsMatch(parameters[1], @"^\s*vert\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant) || Regex.IsMatch(parameters[1], @"^\s*v\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
                 {
                     if (tpcycle != null)
-                    {
                         StopCoroutine(tpcycle);
-                    }
                     cycle.transform.localPosition = new Vector3(-0.07f, 0.02f, 0.07f);
                     tpcycle = StartCoroutine(cycleVert());
-                    while (tpcycle != null) { yield return "trycancel Stopped focusing on feeling due to a request to cancel!"; }
                 }
                 else
-                {
                     yield return "sendtochaterror The specified way to feel the module '" + parameters[1] + "' is invalid!";
-                }
             }
             else if (parameters.Length == 1)
-            {
                 yield return "sendtochaterror Please specify whether you wish to feel the module horizontally or vertically!";
-            }
             yield break;
         }
         if (Regex.IsMatch(parameters[0], @"^\s*press\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
         {
             yield return null;
             if (parameters.Length > 2)
-            {
                 yield return "sendtochaterror Too many parameters!";
-            }
             else if (parameters.Length == 2)
             {
+                if (tpcycle != null)
+                    StopCoroutine(tpcycle);
+                cycle.SetActive(false);
                 string[] chars = new string[] { "A", "B", "C", "D" };
                 for (int i = 0; i < parameters[1].Length; i++)
                 {
@@ -455,9 +412,7 @@ public class DeafAlleyScript : MonoBehaviour {
                 }
             }
             else if (parameters.Length == 1)
-            {
                 yield return "sendtochaterror Please specify which region(s) to press!";
-            }
             yield break;
         }
     }
